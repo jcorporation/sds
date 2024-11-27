@@ -1290,8 +1290,9 @@ sds *sdssplitargs(const char *line, int *argc) {
                 if (*p) p++;
             }
             /* add the token to the vector */
-            vector = s_realloc(vector,((*argc)+1)*sizeof(char*));
-            if (vector == NULL) goto err;
+            char **tmpvector = s_realloc(vector,((*argc)+1)*sizeof(char*));
+            if (tmpvector == NULL) goto err;
+            vector = tmpvector;
             vector[*argc] = current;
             (*argc)++;
             current = NULL;
