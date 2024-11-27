@@ -1,1 +1,9 @@
 sds-test
+
+# Build directories
+build/
+out/
+
+# IDE and editor private config/settings
+.vs/
+CMakeSettings.json
