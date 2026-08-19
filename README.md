@@ -155,6 +155,7 @@ Creating SDS strings
 sds sdsnewlen(const void *init, size_t initlen);
 sds sdsnew(const char *init);
 sds sdsempty(void);
+sds sdsemptyroom(capacity);
 sds sdsdup(const sds s);
 ```
 
@@ -186,6 +187,25 @@ string's memory. This way you can create an empty buffer of a certain length.
 
     ```c
     sds mystring = sdsempty();
+    printf("%d\n", (int) sdslen(mystring));
+
+    output> 0
+    ```
+
+* The `sdsemptyroom()` function creates an empty zero-length string with a pre-allocated capacity:
+
+    ```c
+    sds mystring = sdsemptyroom(1024);
+    printf("%d\n", (int) sdslen(mystring));
+
+    output> 0
+    ```
+
+    Same as:
+
+    ```c
+    sds mystring = sdsempty();
+    mystring = sdsMakeRoomFor(mystring, 1024);
     printf("%d\n", (int) sdslen(mystring));
 
     output> 0
